@@ -6,7 +6,7 @@ ipr = "trust200902"
 [seriesInfo]
 status = "informational"
 name = "Internet-Draft"
-value = "draft-ietf-sidrops-aspa-notation-02"
+value = "draft-ietf-sidrops-aspa-notation-03"
 
 [[author]]
 initials="T."
@@ -91,7 +91,7 @@ separator           = " => "
 
 providers           = providers-one-line / providers-multiline
 providers-one-line  = asn *(*wsp "," *wsp asn)
-providers-multiline = "[" *wspml asn *(*wspml "," *wspml asn) *wsp "]"
+providers-multiline = "[" *wspml asn *(*wspml "," *wspml asn) *wspml "]"
 
 asn                 = "AS" uint32
 uint32              = %d0-4294967295
@@ -104,7 +104,7 @@ cr                  = %d13
 lf                  = %d10
 
 space               = %d32
-tab                 = %d8
+tab                 = %d9
 ~~~
 
 ## customer-asid
@@ -143,8 +143,8 @@ readability but is technically allowed by this specification.
 
 ~~~
 AS65000 => AS65001
-65000 => AS65001
-65000 => AS65002
+AS65000 => AS65001
+AS65000 => AS65002
 AS65000 => AS65001, AS65002,AS65003
 
 AS65000 => [ AS65001, AS65002, AS65003 ]
@@ -156,7 +156,7 @@ AS65000 => [
 ]
 
 AS65000 => [AS65001,
-                     65002
+                     AS65002
 ,AS65003
     ]
 ~~~

@@ -11,11 +11,11 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Check Out Repo
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: cache xml2rfc cache
         id: xml2rfc-cache
-        uses: actions/cache@v3
+        uses: actions/cache@v4
         with:
           key: xml2rfc-cache
           path: .cache-xml2rfc
@@ -30,7 +30,7 @@ jobs:
           image: paulej/rfctools
           options: -v ${{ github.workspace }}:/rfc -v ${{ github.workspace }}/.cache-xml2rfc:/var/cache/xml2rfc -w /rfc
           run: |
-            mmark draft-ietf-sidrops-aspa-notation-02.md > output/draft-ietf-sidrops-aspa-notation-02.xml
+            mmark draft-ietf-sidrops-aspa-notation-03.md > output/draft-ietf-sidrops-aspa-notation-03.xml
 
       - name: build html
         uses: addnab/docker-run-action@v3
@@ -38,10 +38,10 @@ jobs:
           image: paulej/rfctools
           options: -v ${{ github.workspace }}:/rfc -v ${{ github.workspace }}/.cache-xml2rfc:/var/cache/xml2rfc -w /rfc
           run: |
-            xml2rfc -p output --text --html output/draft-ietf-sidrops-aspa-notation-02.xml
+            xml2rfc -p output --text --html output/draft-ietf-sidrops-aspa-notation-03.xml
 
       - name: Archive output
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: xml2rfc-output
           path: output/
